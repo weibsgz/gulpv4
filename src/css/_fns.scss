@@ -1,0 +1,9 @@
+@use 'sass:math';
+
+/* 转换 rem 单位, 默认: 2倍*/
+@function rem($value, $num: 2) {
+  @if ($num <= 0) {
+    $num: (-$num);
+  }
+  @return math.div(math.div($value, $num), 100) * 1rem;
+}

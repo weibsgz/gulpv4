@@ -1,0 +1,28 @@
+<!--#wrap path="./_wrapIndex.html" -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!--#insert path="./components/-meta.html" -->
+  <!--#insert path="./components/-link.html" -->
+  <!--#insert path="./components/-font-setting.html"-->
+  <title>index</title>
+</head>
+
+<body>
+  <h3>你大爷永远是你大爷!</h3>
+  <ul>
+    <!--#each jsonPath="this" rawJson="[{id: 1, title:'hello world'},{id: 2, title: 'hello gulp'}]"-->
+    <li>
+      <span>
+        <!--#data jsonPath="id"-->
+      </span>
+      <span>
+        <!--#data jsonPath="title"-->
+      </span>
+    </li>
+    <!--#endeach-->
+  </ul>
+</body>
+<!--#insert path="./components/-footer.html"-->
+<!--#endwrap -->

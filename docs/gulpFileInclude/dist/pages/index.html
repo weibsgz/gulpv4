@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>index</title>
+<style>
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 4px 0;
+  }
+
+  h4 {
+    padding-left: 10px;
+  }
+
+  p {
+    padding-left: 10px;
+  }
+
+  pre {
+    margin: 2px 0;
+  }
+</style>
+<!-- <link rel="stylesheet" href="../libs/element-ui.min.css" /> -->
+<link rel="stylesheet" href="../css/index.min.css" />
+</head>
+<html>
+
+<body>
+  <h2><a href="https://www.npmjs.com/package/gulp-file-include">gulp-file-include </a></h2>
+  <div>&#64;&#64;include('./components/menu.html')</div>
+  <h4>&#64;&#64;if 判断</h4>
+  
+  <p>Hello if</p>
+  
+  <h4>&#64;&#64;for 循环</h4>
+  <ul>
+     <li>0_gg</li>
+       <li>1_gg</li>
+       <li>2_gg</li>
+       <li>3_gg</li>
+       <li>4_gg</li>
+      
+  </ul>
+  <h4>&#64;&#64;loop 循环</h4>
+  <div>
+    <div>
+  <h5>My post title</h5>
+  <p>lorem ipsum...</p>
+</div><div>
+  <h5>Another post</h5>
+  <p>lorem ipsum...</p>
+</div><div>
+  <h5>One more post</h5>
+  <p>lorem ipsum...</p>
+</div>
+  </div>
+  <h4>&#64;&#64;include_once 只导入一次</h4>
+  <div>
+    <p><label>haoxin</label></p>
+<p><label>12345</label></p>
+<p><strong>facebook.com/include</strong></p>
+<p><strong>twitter.com/include</strong></p>
+    
+  </div>
+</body>
+<script src="../js/chunk-vendor.min.js"></script>
+<!-- <script src="../libs/elmenet-ui.min.js"></script> -->
+<script src="../js/common.min.js"></script>
+<script type="text/javascript">
+  setTimeout(function () {
+    var h3List = document.querySelectorAll('h3');
+    var h4List = document.querySelectorAll('h4');
+    for (var i = 0; i < h3List.length; i++) {
+      h3List[i].style.color = "red";
+    }
+    for (var i = 0; i < h4List.length; i++) {
+      h4List[i].style.color = "blue";
+    }
+  }, 3000)
+</script>
+
+</html>

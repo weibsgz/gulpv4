@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+@@include('./components/head.html')
+<html>
+
+<body>
+  <h2><a href="https://www.npmjs.com/package/gulp-file-include">gulp-file-include </a></h2>
+  @@include('./components/menu.html')
+  <h4>&#64;&#64;if 判断</h4>
+  @@if (true) {
+  <p>Hello if</p>
+  }
+  <h4>&#64;&#64;for 循环</h4>
+  <ul>
+    @@for (var i = 0; i < 5; i++) { <li>`+i+`_gg</li>
+      }
+  </ul>
+  <h4>&#64;&#64;loop 循环</h4>
+  <div>
+    @@loop('./components/nav.html', [
+    { "title": "My post title", "text": "<p>lorem ipsum...</p>" },
+    { "title": "Another post", "text": "<p>lorem ipsum...</p>" },
+    { "title": "One more post", "text": "<p>lorem ipsum...</p>" }
+    ])
+  </div>
+  <h4>&#64;&#64;include_once 只导入一次</h4>
+  <div>
+    @@include_once('./components/var.html', {
+    "name": "haoxin",
+    "age": 12345,
+    "socials": {
+    "fb": "facebook.com/include",
+    "tw": "twitter.com/include"
+    }
+    })
+    @@include_once('./components/var.html', {
+    "name": "haoxin",
+    "age": 12345,
+    "socials": {
+    "fb": "facebook.com/include",
+    "tw": "twitter.com/include"
+    }
+    })
+  </div>
+</body>
+@@include('./components/footer.html')
+
+</html>

@@ -1,0 +1,157 @@
+<!--#wrap path="./_wrapIndex.html" -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!--#insert path="./components/-head.html"-->
+
+<body>
+  <h3>配置项</h3>
+  <p>默认的结构: &lt;!--#tagName attributeName="attributeValue" --&gt;</p>
+  <p>下面的示例为默认配置, 可以自定义覆盖</p>
+  <pre>
+  // options.jsonInput         = A json object used to populate data in files
+  // options.insertPattern     = The test looked for in order to insert files
+  //          (this is so ssi includes can be used instead)
+  // options.filePathAttribute = the name used for the file pathing for #insert
+  //          and #wrap (default= 'path')
+  // options.jsonPathAttribute = the name used for the file pathing for #insert
+  //          , #wrap, #data, #jsonInsert (default= 'jsonPath')
+  //
+  //
+  // options.dev.limitIterations = the number of times processFileWithJsonInput will loop
+  // options.dev.printIterations = console log each processFileWithJsonInput loop
+  // options.dev.printResult = console logs the final output
+  // options.dev.printPaths = console logs the output of buildPathFromRelativePath
+</pre>
+
+  <hr />
+  <h3>当前文件内导入其他文件</h3>
+  <p>导入的文件名以 - 开头, - 开头的文件会被忽略掉不被编译打包, 编译后的文件名以当前文件名命名</p>
+  <pre>&lt;!--#insert path="./components/-nav.html" --&gt;</pre>
+  <!--#insert path="./components/-nav.html" -->
+  <hr />
+
+  <h3>当前文件中的内容插入到目标文件指定位置(原理类似于插槽)</h3>
+  <p>目标文件名以 _ 开头命名, _ 开头的文件会被忽略掉不被编译打包, 编译后的文件名以当前文件名命名</p>
+  <h4>插入的内容</h4>
+  <p>标记内的内容被渲染到目标文件指定位置</p>
+  <pre>
+  &lt;!--#wrap path="./_wrap.html" --&gt;
+  &lt;div&gt;
+    &lt;h4&gt;Hello Wrap&lt;/h4&gt;
+  &lt;/div&gt;
+  &lt;!--#endwrap --&gt;
+</pre>
+  <h4>目标文件</h4>
+  <p>当前标记可以在任何位置</p>
+  <pre>
+  &lt;!--#middle --&gt;
+</pre>
+  <hr />
+
+  <h3>导入文件插入数据</h3>
+  <p></p>
+  <!--#insert path="./components/-menu.html" jsonPath="to" rawJson="{to:{json:'hello insert path with rawJson'}}" -->
+  <hr />
+
+  <h3>插入 JSON 数据</h3>
+  <p>此处的 json 可以使用 rawJson 属性配置, 或者使用 gulpfile 配置文件中 gulp-htmlincluder 方法传入 jsonInput 参数上</p>
+  <pre>
+  gulp-htmlincluder({jsonInput: require('./xxx.json'), ...});
+  &lt;!--#jsonInsert jsonPath="path.to.json" rawJson="" --&gt;
+</pre>
+  <hr />
+
+  <h3>文件内使用数据</h3>
+  <pre>&lt;!--#data jsonPath="name" rawJson="{name:'hello gulp-htmlincluder'}" default="hello world"--&gt;</pre>
+  <!--#data jsonPath="name" rawJson="{name:'hello gulp-htmlincluder'}" default="hello world"-->
+  <hr />
+
+  <h3>使用判断</h3>
+  <pre>
+  &lt;!--#if jsonPath="flag" rawJson="{flag:true}"--&gt;
+    &lt;p&gt;类型为真的判断&lt;/p&gt;
+  &lt;!--#endif--&gt;
+</pre>
+  <!--#if jsonPath="flag" rawJson="{flag:true}"-->
+  <p>类型为真的判断</p>
+  <!--#endif-->
+  <hr />
+
+  <h3>遍历数据</h3>
+  <h4>遍历数组</h4>
+  <pre>
+  &lt;ul&gt;
+    &lt;!--#each jsonPath="this" rawJson="[1, 2, 3]"--&gt;  
+    &lt;li&gt;
+      &lt;!--#data jsonPath="this"--&gt;
+    &lt;/li&gt;
+      &lt;!--#endeach --&gt;
+  &lt;/ul&gt;
+</pre>
+  <ul>
+    <!--#each jsonPath="this" rawJson="[1, 2, 3]"-->
+    <li>
+      <!--#data jsonPath="this"-->
+    </li>
+    <!--#endeach -->
+  </ul>
+  <h4>遍历对象</h4>
+  <pre>
+  &lt;ul&gt;
+    &lt;!--#each jsonPath="this" rawJson="[{name:'tom',age:18},{name:'jerry',age:19},{name:'jack'}]"--&gt;
+    &lt;li&gt;
+      &lt;span&gt;name&lt;/span&gt;&lt;span&gt;
+        &lt;!--#data jsonPath="name"--&gt;
+      &lt;/span&gt;
+      &lt;span&gt;age&lt;/span&gt;&lt;span&gt;
+        &lt;!--#data jsonPath="age" default="99"--&gt;
+      &lt;/span&gt;
+    &lt;/li&gt;
+    &lt;!--#endeach--&gt;
+  &lt;/ul&gt;
+</pre>
+  <ul>
+    <!--#each jsonPath="this" rawJson="[{name:'tom',age:18},{name:'jerry',age:19},{name:'jack'}]"-->
+    <li>
+      <span>name</span><span>
+        <!--#data jsonPath="name"-->
+      </span>
+      <span>age</span><span>
+        <!--#data jsonPath="age" default="99"-->
+      </span>
+    </li>
+    <!--#endeach-->
+  </ul>
+  <h4>jsonPath 属性为要使用的 rawJson 数据中的 key </h4>
+  <pre>
+  &lt;!--#jsonInsert jsonPath="path.to.json" rawJson="{ path: { to: { json: "hello world" } } }" --&gt;
+</pre>
+  <h4>rawJson 属性可以为自执行函数返回数据</h4>
+  <pre>
+  &lt;!--#data
+  jsonPath="heading"
+  rawJson="(function(j){
+    console.log(j);
+    return { heading: j.heading.split('').reverse().join('') }
+  })(json)"--&gt;
+</pre>
+  <hr />
+
+  <h3>忽略内容</h3>
+  <h4>忽略之外的内容</h4>
+  <pre>
+  &lt;!--#clipbefore --&gt;
+    此处内容显示, 其他内容被忽略
+  &lt;!--#clipafter  --&gt;
+</pre>
+  <h4>忽略之内的内容</h4>
+  <pre>
+  &lt;!--#clipbetween --&gt;
+    此处的内容会被忽略, 其他内容正常编译
+  &lt;!--#endclipbetween --&gt;
+</pre>
+</body>
+<!--#insert path="./components/-footer.html"-->
+<!--#endwrap -->

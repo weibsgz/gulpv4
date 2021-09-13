@@ -1,0 +1,50 @@
+body {
+  font-size: 16px;
+}
+.box {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+#grad {
+  background-image: linear-gradient(to right, red, yellow);
+}
+.item {
+  transition: all 0.5s linear;
+  transform-origin: center center;
+  transform: rotate(45deg);
+  //-webkit-transform: rotate(45deg);
+  //-moz-transform: rotate(45deg);
+  //-ms-transform: rotate(45deg);
+  //-o-transform: rotate(45deg);
+  //-webkit-transition: all 0.5s linear;
+  //-moz-transition: all 0.5s linear;
+  //-ms-transition: all 0.5s linear;
+  //-o-transition: all 0.5s linear;
+  animation-name: run;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-direction: reverse;
+}
+
+.autoplacement-example {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: 20px;
+}
+
+@keyframes run {
+  10% {
+    width: 10px;
+  }
+  50% {
+    width: 50px;
+  }
+  70% {
+    width: 70px;
+  }
+  100% {
+    width: 100px;
+  }
+}

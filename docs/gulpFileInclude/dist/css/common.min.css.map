@@ -1,0 +1,1 @@
+{"version":3,"sources":["common.scss"],"names":[],"mappings":"AAAA,KACE,WAAA,eACA,UAAA","file":"common.min.css","sourcesContent":["body {\r\n  background: rgba(00, 00, 00, 0.5);\r\n  font-size: 100px;\r\n}\r\n"]}
